@@ -1,0 +1,31 @@
+{
+  "name": "sass-color-curve",
+  "version": "0.1.0",
+  "description": "A color tool for generating more saturated color options on the fly",
+  "author": "Jake Miller <jake83miller@gmail.com> (https://github.com/jcmill)",
+  "exports": {
+    "sass": "./_sass-color-curve.scss"
+  },
+  "homepage": "https://github.com/jcmill/sass-color-curve#readme",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/jcmill/sass-color-curve.git"
+  },
+  "bugs": {
+    "url": "https://github.com/jcmill/sass-color-curve/issues"
+  },
+  "keywords": [
+    "sass",
+    "scss",
+    "color",
+    "colors",
+    "saturated",
+    "saturation",
+    "theme",
+    "variation",
+    "variations",
+    "linear",
+    "namespace"
+  ],
+  "license": "ISC"
+}
