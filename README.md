@@ -1,4 +1,4 @@
-# Scss Color Curve (ScssCC)
+# Scss Color Curve (SCC)
 
 The SCSS Color Curve (SCC) is a color mapping tool that simplifies the process of generating color themes and variations from a base color. Unlike the deprecated SASS <code>lighten</code> and <code>darken</code> functions, SCC offers both linear and non-linear approaches for creating color variations. The non-linear approach generates two asymptotic curves from the base color, one approaching a luminance of 100 (white) and the other approaching a luminance of 0 (black). By emphasizing saturation, SCC produces richer and more dynamic color variations compared to simple lightening and darkening techniques. Which can lead to dull and muddy colors.
 
