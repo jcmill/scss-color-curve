@@ -11,7 +11,7 @@
   }
 };
 
-@function color($color, $scale: 0, $linear: false, $gradientScale: 3) {
+@function color-curve($color, $scale: 0, $linear: false, $gradientScale: 3) {
 
   // get the base color through map
   $baseColor: if(map-has-key($color-settings, colors, $color, value), 
