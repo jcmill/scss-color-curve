@@ -1,18 +1,18 @@
 {
   "name": "sass-color-curve",
   "version": "0.1.0",
-  "description": "A color tool for generating more saturated color options on the fly",
+  "description": "The SCSS Color Curve (SCC) is a color mapping tool that simplifies the process of generating color themes and variations from a base color.",
   "author": "Jake Miller <jake83miller@gmail.com> (https://github.com/jcmill)",
   "exports": {
     "sass": "./_sass-color-curve.scss"
   },
-  "homepage": "https://github.com/jcmill/sass-color-curve#readme",
+  "homepage": "https://github.com/jcmill/scss-color-curve#readme",
   "repository": {
     "type": "git",
-    "url": "https://github.com/jcmill/sass-color-curve.git"
+    "url": "https://github.com/jcmill/scss-color-curve.git"
   },
   "bugs": {
-    "url": "https://github.com/jcmill/sass-color-curve/issues"
+    "url": "https://github.com/jcmill/scss-color-curve/issues"
   },
   "keywords": [
     "sass",
