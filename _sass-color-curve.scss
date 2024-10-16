@@ -14,11 +14,11 @@
 @function color($color, $scale: 0, $linear: false, $gradientScale: 3) {
 
   // get the base color through map
-  $baseColor: if(map-has-key($color-settings, colors, $color, value), 
-                  map-get($color-settings, colors, $color, value), 
+  $baseColor: if(map-has-key($color-settings, colors, $color, 0), 
+                  map-get($color-settings, colors, $color, 0), 
                   $color);
    // grab the base color saturattion and luminance as starting point for building other colors
-   $baseSaturation:  color.channel($baseColor, "saturation", $space: hsl);;
+   $baseSaturation:  color.channel($baseColor, "saturation", $space: hsl);
   //  $baseSaturation: saturation($baseColor);
    $baseLuminance: color.channel($baseColor, "lightness", $space: hsl);
   //  $baseLuminance: lightness($baseColor);
@@ -38,13 +38,13 @@
                     $gradientScale);
   
     // if any of the color maps have keys with numbers, that indicates a custom color scheme. this pulls the key value pair and returns the color for the scale value.
-    $customColors: map-get($color-settings, $color);
+    $customColors: map-get($color-settings, colors, $color);
 
     // if there are custom colors in a map, this will take the number of keys in a map, initiate a negative amount equal to the number of key to start cycling through eack key. this ensures it will grab negative keys values as well.
     $k: -1 * length($customColors);
-    @while $k < length($customColors) {
-      @if ($k == $scale and map-has-key($color-settings, $color, $k)) {
-        $customColors: map-get($color-settings, $color, $k);
+    @while $k < length($customColors){
+      @if ($k == $scale and map-has-key($color-settings, colors, $color, $k)) {
+        $customColors: map-get($color-settings, colors, $color, $k);
         @return $customColors;
       }
       $k: $k + 1;    

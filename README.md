@@ -5,7 +5,7 @@ The SCSS Color Curve (SCC) is a color mapping tool that simplifies the process o
 ## How does Scss Color Curve work?
 The SCC has two options when approaching shifts in colors. The first, the default, is a curved approach that tries to maintain saturation in each shift in color. The second option is a linear approach that strictly adds black or white to the color.
 
-One other default behavior to take note of is if the base color is gray (has a saturation of 0%) the shift in colors will only utilize the linear approach. This prevents grays from becoming tinted with unintended colors. As example, because of the default position of #000000, shifting black with a curve will add red to the color. Likewise, #ffffff will shift into pinks. In order to avoid unintended shifting in grays, this default behavior is forced.
+One other default behavior of note is, if the base color is gray (has a saturation of 0%) the shift in colors will only utilize the linear approach. This prevents grays from becoming tinted with unintended colors. As example, because of the default position of #000000, shifting black with a curve will add red to the color. Likewise, #ffffff will shift into pinks. In order to avoid unintended shifting in grays, this default behavior is forced.
 
 
 ### Curved Approach
@@ -42,21 +42,21 @@ The function pulls from a color map you create named <code>$color-settings</code
 $color-settings: (
   'colors': (
     'a': (
-      value: #d62121,
+      0: #d62121,
       name: 'red',
       gradientScale: 3
     )
   )
 ) 
 ```
-In these maps, the actionable keys are the initial name of each key (in this example, <code>a</code>), the <code>value</code> which will be concidered the base color, and the <code>gradientScale</code> which adjusts the intensity of each shift in color, starting from the base. A gradient of 1 will produce a very subtle gradient, while a value of 6 will create harsher shifts in colors. If the gradientScale is omitted, the value will default to 3.
+In these maps, the actionable keys are the initial name of each key (in this example, <code>a</code>), the <code>0</code> which will be concidered the base color, and the <code>gradientScale</code> which adjusts the intensity of each shift in color, starting from the base. A gradient of 1 will produce a very subtle gradient, while a value of 6 will create harsher shifts in colors. If the gradientScale is omitted, the value will default to 3.
 
 **The simplest passable map would be:**
 ``` scss
 $color-settings: (
   'colors': (
     'a': (
-      value: #d62121
+      0: #d62121
     )
   )
 ) 
@@ -68,7 +68,7 @@ If the shifting of a color has to be controlled further, custom color options fo
 $color-settings: (
   'colors': (
     'b': (
-      value: #e81c0d,
+      0: #e81c0d,
       name: 'custom gradient',
       gradientScale: 2,
       -5: #e2136f, 
