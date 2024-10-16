@@ -11,13 +11,14 @@
   }
 };
 
-@function color($color, $scale: 0, $linear: false, $gradientScale: 3) {
+@function color($color, $scale: 0, $linear: false, $gradientScale: 3, $nameSpace: $color-settings) {
 
-  // get the base color through map
-  $baseColor: if(map-has-key($color-settings, colors, $color, 0), 
-                  map-get($color-settings, colors, $color, 0), 
-                  $color);
-   // grab the base color saturattion and luminance as starting point for building other colors
+  // get the base color through map. default to $color-settings with the option to namespace a seperate map.
+    $baseColor: if(map-has-key($nameSpace, colors, $color, 0), 
+                  map-get($nameSpace, colors, $color, 0), 
+                  map-get($nameSpace, $color, $scale)) ;
+
+  // grab the base color saturattion and luminance as starting point for building other colors
    $baseSaturation:  color.channel($baseColor, "saturation", $space: hsl);
   //  $baseSaturation: saturation($baseColor);
    $baseLuminance: color.channel($baseColor, "lightness", $space: hsl);
