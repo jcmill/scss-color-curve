@@ -1,9 +1,9 @@
-# Scss Color Curve (SCC)
+# Scss Color Curve
 
-The SCSS Color Curve (SCC) is a color mapping tool that simplifies the process of generating color themes and variations from a base color. Unlike the deprecated SASS <code>lighten</code> and <code>darken</code> functions, SCC offers both linear and non-linear approaches for creating color variations. The non-linear approach generates two asymptotic curves from the base color, one approaching a luminance of 100 (white) and the other approaching a luminance of 0 (black). By emphasizing saturation, SCC produces richer and more dynamic color variations compared to simple lightening and darkening techniques. Which can lead to dull and muddy colors.
+The SCSS Color Curve (SCC) is a color mapping tool that simplifies the process of generating color themes and variations of a base color. Unlike the deprecated SASS <code>lighten</code> and <code>darken</code> functions, SCC offers both linear and non-linear approaches for creating color variations. The non-linear approach generates two asymptotic curves from the base color, one approaching a luminance of 100 (white) and the other approaching a luminance of 0 (black). By holding saturation as the priority of the color, SCC produces richer and more dynamic color variations compared to simple lightening and darkening techniques. Which can lead to dull and muddy colors. The linear approach stickly adds black and white to the base color.
 
 ## How does Scss Color Curve work?
-The SCC has two options when approaching shifts in colors. The first, the default, is a curved approach that tries to maintain saturation in each shift in color. The second option is a linear approach that strictly adds black or white to the color.
+The SCC has two options when approaching shifts in colors. First approach, by default, the tool tries to maintain saturation in each shift in color. In order to keep colors rich in tone throughout the shifting color, which creates a more vibrant gradient. The second option is a linear approach that strictly adds black or white to the color. Ideal for colors that need to stay dull.
 
 One other default behavior of note is, if the base color is gray (has a saturation of 0%) the shift in colors will only utilize the linear approach. This prevents grays from becoming tinted with unintended colors. As example, because of the default position of #000000, shifting black with a curve will add red to the color. Likewise, #ffffff will shift into pinks. In order to avoid unintended shifting in grays, this default behavior is forced.
 
@@ -25,7 +25,7 @@ Each step in the linear approach is multiplied by 5%. So a step of 3 would chang
 
 ## The Structure of the Function
 ``` scss 
-@function color($color, $scale: 0, $linear: false, $gradientScale) {...}
+@function color($color, $scale: 0, $linear: false, $gradientScale, $nameSpace: $color-settings) {...}
 ```
 **$color** - passes a color or the key of a color 
 
@@ -84,4 +84,22 @@ $color-settings: (
     )
   )
 ) 
+```
+
+### Namespacing
+If there are different color maps that need to pass through SCC, you can specify the namespace and key/map you wish to utilize with the last argument in the function. <code>namespace</code> has a default of <code>color-settings</code> as shown above, but this can be changed to pull from a completely separate map.
+
+Using the following map:
+``` scss
+$social: (
+  'twitter': (
+    0: #000000,
+    name: 'twitter',
+  )
+) 
+```
+You can pass the following into the function to return the Twitter color from the social map and make adjustments to the color as needed.
+
+``` scss
+color(twitter, 0, $nameSpace: $social) // returns the base color #000000 under twitter in the $social map
 ```
