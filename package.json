@@ -1,6 +1,6 @@
 {
   "name": "scss-color-curve",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "The SCSS Color Curve (SCC) is a color mapping tool that simplifies the process of generating color themes and variations from a base color.",
   "author": "Jake Miller <jake83miller@gmail.com> (https://github.com/jcmill)",
   "main": "_sass-color-curve.scss",
