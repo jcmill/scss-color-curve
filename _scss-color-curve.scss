@@ -1,5 +1,7 @@
 @use 'sass:color';
 @use 'sass:math';
+@use 'sass:map';
+@use 'sass:list';
 
 @function stripUnit($value) {
   // if value has a unit, strip it
@@ -14,10 +16,10 @@
 @function color($color, $scale: 0, $linear: false, $gradientScale: 3, $namespace: $color-settings) {
 
   // get the base color through map. default to $color-settings with the option to namespace a seperate map or use a hex code for the color straight up.
-  $baseColor: if(map-has-key($namespace, colors, $color, 0), 
-                map-get($namespace, colors, $color, 0), 
-                  if(map-has-key($namespace, $color), 
-                    map-get($namespace, $color, $scale), 
+  $baseColor: if(map.has-key($namespace, colors, $color, 0), 
+                map.get($namespace, colors, $color, 0), 
+                  if(map.has-key($namespace, $color), 
+                    map.get($namespace, $color, $scale), 
                     $color));
 
   // grab the base color saturattion and luminance as starting point for building other colors
@@ -36,18 +38,18 @@
   @if ($linear == false) {
                     
     // get scale through map
-    $gradientScale: if(map-has-key($color-settings, $color, gradientScale), 
-                    map-get($color-settings, $color, gradientScale), 
+    $gradientScale: if(map.has-key($color-settings, $color, gradientScale), 
+                    map.get($color-settings, $color, gradientScale), 
                     $gradientScale);
   
     // if any of the color maps have keys with numbers, that indicates a custom color scheme. this pulls the key value pair and returns the color for the scale value.
-    $customColors: map-get($color-settings, colors, $color);
+    $customColors: map.get($color-settings, colors, $color);
 
     // if there are custom colors in a map, this will take the number of keys in a map, initiate a negative amount equal to the number of key to start cycling through eack key. this ensures it will grab negative keys values as well.
-    $k: -1 * length($customColors);
-    @while $k < length($customColors){
-      @if ($k == $scale and map-has-key($color-settings, colors, $color, $k)) {
-        $customColors: map-get($color-settings, colors, $color, $k);
+    $k: -1 * list.length($customColors);
+    @while $k < list.length($customColors){
+      @if ($k == $scale and map.has-key($color-settings, colors, $color, $k)) {
+        $customColors: map.get($color-settings, colors, $color, $k);
         @return $customColors;
       }
       $k: $k + 1;    
@@ -88,7 +90,7 @@
       $adjustedScale: math.div(stripUnit($difference), math.div($gradientScale, 2));
 
       // sum of consecutive integers based on the condition of $scale used to change the base color. basically a whole number version fo the @while below "n + (n/2)(1 + n)". changing 2 to 3 and 1 to 5 below, allows for a more gradual growth between steps
-      $newSaturation: percentage(calc((abs($scale) + math.div(abs($scale), 2) * (1 + abs($scale))) / 100)
+      $newSaturation: math.percentage(calc((abs($scale) + math.div(abs($scale), 2) * (1 + abs($scale))) / 100)
       );
 
       // asymptote growth/decay equation y = 2/x
@@ -111,7 +113,7 @@
       $adjustedScale: math.div(stripUnit($difference), math.div($gradientScale, 2));
 
       // sum of consecutive integers based on the condition of $scale used to change the base color. basically a whole number version fo the @while below "n + (n/2)(1 + n)". changing 2 to 1.5 and 1 to 5 below, allows for shift in the curve
-      $newSaturation: percentage(calc((math.div(abs($scale), 2) * (1 + abs($scale))) / 100));
+      $newSaturation: math.percentage(calc((math.div(abs($scale), 2) * (1 + abs($scale))) / 100));
 
       // asymptote growth/decay equation adjusted for closer initial jump from baseColor
       $newLuminance: 1 + calc((math.div($difference, 5) * (1 / abs($adjustedScale))));

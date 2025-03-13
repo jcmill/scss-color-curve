@@ -1,6 +1,10 @@
+
+# 1.2.1 (patch) - 2025 03-13
+- update deprecations
+- importing additional built-in functions to update file with modern scss.
+
 # 0.2.1 (patch) - 2024 10-18
 - file name change
-
 
 # 0.2.0 - 2024 10-17
 - update to package.json file
